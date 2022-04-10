@@ -17,6 +17,7 @@
     background: transparent;
     color: red;
     border-color: transparent;
+    font-weight: bold;
 }
 
 .todo-list {

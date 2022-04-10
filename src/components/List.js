@@ -3,15 +3,15 @@ import './List.css';
 
 import { FaEdit, FaTrash } from 'react-icons/fa';
 
-const List = ({items}) => {
+const List = ({items, deleteItem, editItem}) => {
     const todoList = items.map((item) => {
         return (
         <li key={item.id} className="list-bar">
             {item.title}
             <span>
-                <FaEdit color="red" cursor="pointer" />
+                <FaEdit color="green" cursor="pointer" onClick={() => editItem(item.id)}/>
                 {" "}
-                <FaTrash color="blue" cursor="pointer"/>
+                <FaTrash color="red" cursor="pointer" onClick={() => deleteItem(item.id)}/>
             </span>  
         </li>
         )

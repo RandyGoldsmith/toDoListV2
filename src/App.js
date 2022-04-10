@@ -13,7 +13,7 @@ function App() {
   const onHandleSubmit = (e) => {
     e.preventDefault();
     if(!name) {
-      alertInfo(true, 'Enter a value', 'danger');
+      alertInfo(true, 'Enter a todo item', 'danger');
     } else if(name && isEditing) {
       //
     } else {
@@ -26,6 +26,22 @@ function App() {
   const alertInfo = (show=false, message='', type='') => {
     setAlert({show, message, type });
   }
+
+  const clearItems = () => {
+    alertInfo(true, 'Items Deleted!', 'danger');
+    setList([]);
+  };
+
+  const deleteItem = (id) => {
+    alertInfo(true, 'Item Deleted', 'danger');
+    setList(list.filter((item) => {
+      return item.id !== id;
+    }));
+  };
+
+  const editItem = (id) => {
+
+  };
 
   
 
@@ -53,8 +69,8 @@ function App() {
           </div>                
       </form>
       <div className="todo-list">
-        <List items={list}/>
-        <button className="clear-btn">
+        <List items={list} deleteItem={deleteItem} editItem={editItem}/>
+        <button className="clear-btn" onClick={clearItems}>
           Clear List
         </button>
       </div>
