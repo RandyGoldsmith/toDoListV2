@@ -1,0 +1,26 @@
+.section-center {
+    width: 90vw;
+    margin: 0 auto;
+    max-width: 35rem;
+    margin-top: 8rem;
+    border-radius: 0.25rem;
+    box-shadow: 0 5px 15px rgb(156, 156, 156);
+    background-color: white;
+    padding: 2rem;
+}
+
+.form-center {
+    text-align: center;
+}
+
+.clear-btn {
+    background: transparent;
+    color: red;
+    border-color: transparent;
+}
+
+.todo-list {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+}
