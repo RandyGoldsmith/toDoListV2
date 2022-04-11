@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import List from './components/List';
 import Alert from './components/Alert';
 import './App.css';
@@ -9,13 +9,25 @@ function App() {
   const [isEditing, setIsEditing] = useState(false);
   const [editID, setEditID] = useState(null);
   const [alert, setAlert] = useState({show: false, message: '', type: ''});
+  
 
   const onHandleSubmit = (e) => {
     e.preventDefault();
     if(!name) {
       alertInfo(true, 'Enter a todo item', 'danger');
     } else if(name && isEditing) {
-      //
+      setList(
+        list.map((item) => {
+          if(item.id === editID) {
+            return {...item, title: name};
+          }
+          return item;
+        })
+      );
+      setName('');
+      setEditID(null);
+      setIsEditing(false);
+      alertInfo(true, 'Item updated!', 'success');
     } else {
       alertInfo(true, 'Added Item!', 'success');
       setList([...list, {id: Math.random(), title: name} ]);
@@ -34,16 +46,20 @@ function App() {
 
   const deleteItem = (id) => {
     alertInfo(true, 'Item Deleted', 'danger');
-    setList(list.filter((item) => {
-      return item.id !== id;
-    }));
-  };
+    setList(list.filter((item) => item.id !== id))
+  }
 
   const editItem = (id) => {
-
+    const individualItem = list.find((item) => item.id === id); 
+    setIsEditing(true);
+    setEditID(id);
+    setName(individualItem.title);
+   
   };
 
-  
+  useEffect(() => {
+    localStorage.setItem("list", JSON.stringify(list));
+  }, [list]);
 
   return (
     <section className="section-center">
