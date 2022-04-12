@@ -3,9 +3,20 @@ import List from './components/List';
 import Alert from './components/Alert';
 import './App.css';
 
+
+const getLocalStorage = () => {
+  let getStorageItem = localStorage.getItem('list');
+  if(getStorageItem) {
+    return JSON.parse(localStorage.getItem('list'));
+  }
+  else {
+    return [];
+  }
+}
+
 function App() {
   const [name, setName] = useState('');
-  const [list, setList] = useState([]);
+  const [list, setList] = useState(getLocalStorage());
   const [isEditing, setIsEditing] = useState(false);
   const [editID, setEditID] = useState(null);
   const [alert, setAlert] = useState({show: false, message: '', type: ''});
